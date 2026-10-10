@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@300;400&display=swap');
+
+.announcement-bar {
+    background: #c9a96e;
+    text-align: center;
+    padding: 7px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #0a0a0a;
+    text-transform: uppercase;
+}
+
+.athar-navbar {
+    background: #0a0a0a;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.2);
+    padding: 0 2rem;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* ===== LOGO ===== */
+.nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: #c9a96e;
+    letter-spacing: 4px;
+    text-decoration: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ===== DESKTOP LINKS ===== */
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(248, 245, 240, 0.65);
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #c9a96e;
+}
+
+/* ===== ACTIONS ===== */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.nav-actions a {
+    color: rgba(248, 245, 240, 0.65);
+    display: flex;
+    transition: color 0.2s;
+}
+
+.nav-actions a:hover {
+    color: #c9a96e;
+}
+
+.nav-divider {
+    width: 1px;
+    height: 18px;
+    background: rgba(201, 169, 110, 0.25);
+}
+
+.cart-icon {
+    position: relative;
+}
+
+.cart-dot {
+    position: absolute;
+    top: -3px;
+    right: -4px;
+    width: 7px;
+    height: 7px;
+    background: #c9a96e;
+    border-radius: 50%;
+}
+
+/* ===== HAMBURGER ===== */
+.hamburger {
+    background: none;
+    border: none;
+    color: rgba(248, 245, 240, 0.8);
+    cursor: pointer;
+    display: none;
+    padding: 0;
+    z-index: 1;
+}
+
+/* ===== MOBILE MENU ===== */
+.mobile-menu {
+    background: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.mobile-menu.open {
+    max-height: 400px;
+    padding: 1.25rem 2rem;
+    border-bottom-color: rgba(201, 169, 110, 0.15);
+}
+
+.mobile-menu a {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: rgba(248, 245, 240, 0.65);
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+    transition: color 0.2s;
+}
+
+.mobile-menu a:last-child {
+    border-bottom: none;
+}
+
+.mobile-menu a:hover {
+    color: #c9a96e;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 991px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-logo {
+        position: static;
+        transform: none;
+    }
+
+    .athar-navbar {
+        justify-content: space-between;
+    }
+}

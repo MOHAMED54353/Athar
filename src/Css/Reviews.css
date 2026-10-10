@@ -1,0 +1,216 @@
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.testimonials {
+    background: var(--clr-dark-2);
+    border-top: var(--border-subtle);
+    border-bottom: var(--border-subtle);
+}
+
+/* ── Slider ── */
+.t-slider {
+    max-width: 700px;
+    margin: 0 auto var(--sp-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+}
+
+.t-quote {
+    font-family: var(--ff-serif);
+    font-size: 80px;
+    font-weight: var(--fw-light);
+    color: var(--clr-accent);
+    line-height: 0.6;
+    opacity: 0.5;
+    margin-bottom: 0.5rem;
+}
+
+.t-text {
+    font-family: var(--ff-serif);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-light);
+    font-style: italic;
+    color: var(--clr-light);
+    line-height: 1.7;
+    margin: 0;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stars */
+.t-stars {
+    display: flex;
+    gap: 4px;
+    font-size: 16px;
+    justify-content: center;
+}
+
+/* Product Tag */
+.t-product-tag {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-wider);
+    text-transform: uppercase;
+    color: var(--clr-dark);
+    background: var(--clr-accent);
+    padding: 4px 16px;
+}
+
+/* Reviewer */
+.t-reviewer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.t-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--clr-dark-3);
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ff-serif);
+    font-size: var(--fs-lg);
+    color: var(--clr-accent);
+    flex-shrink: 0;
+}
+
+.t-reviewer-info {
+    text-align: left;
+}
+
+.t-reviewer-name {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-med);
+    color: var(--clr-light);
+    margin: 0;
+}
+
+.t-reviewer-location {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-xs);
+    color: var(--clr-muted);
+    letter-spacing: var(--ls-wide);
+    margin: 0;
+    margin-top: 2px;
+}
+
+/* Controls */
+.t-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.t-btn {
+    background: transparent;
+    border: 1px solid rgba(201, 169, 110, 0.25);
+    color: var(--clr-muted);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fs-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.t-btn:hover {
+    border-color: var(--clr-accent);
+    color: var(--clr-accent);
+}
+
+.t-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.t-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(201, 169, 110, 0.25);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    padding: 0;
+}
+
+.t-dot.active {
+    background: var(--clr-accent);
+    width: 20px;
+    border-radius: 3px;
+}
+
+/* ── Stats ── */
+.t-stats {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.t-stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 1.5rem 1rem;
+    border: var(--border-subtle);
+    background: var(--clr-dark);
+    text-align: center;
+}
+
+.t-stat-num {
+    font-family: var(--ff-serif);
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-light);
+    color: var(--clr-accent);
+    margin: 0;
+    line-height: 1;
+}
+
+.t-stat-label {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+    color: var(--clr-muted);
+    margin: 0;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 576px) {
+    .t-text {
+        font-size: var(--fs-md);
+    }
+
+    .t-quote {
+        font-size: 60px;
+    }
+
+    .t-stat-num {
+        font-size: var(--fs-xl);
+    }
+}

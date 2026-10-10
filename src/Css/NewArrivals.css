@@ -1,0 +1,49 @@
+/* ============================================================
+   NEW ARRIVALS
+   ============================================================ */
+.new-arrivals {
+    background: var(--clr-dark);
+}
+
+/* ── Grid ── */
+.na-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-lg);
+}
+
+/* ── Badge Sale variant ── */
+.badge--sale {
+    background: #1a1a1a !important;
+    color: var(--clr-accent) !important;
+    border: 1px solid rgba(201, 169, 110, 0.35);
+}
+
+/* ── CTA ── */
+.na-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--sp-xl);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+    .na-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .na-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--sp-md);
+    }
+}
+
+@media (max-width: 400px) {
+    .na-grid {
+        grid-template-columns: 1fr;
+    }
+}

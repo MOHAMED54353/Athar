@@ -96,10 +96,7 @@ export default function SummerCollection() {
                             </div>
                         </a>
                     ))}
-
                 </div>
-
-                {/* Bottom CTA */}
                 <div style={{
                     display: "flex",
                     justifyContent: "center",

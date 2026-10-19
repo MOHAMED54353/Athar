@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useCart } from "./CartContext";
 import "../Css/NewArrivals.css";
 
 const products = [
@@ -38,11 +40,20 @@ const products = [
 ];
 
 export default function NewArrivals() {
+    const { addToCart } = useCart();
+    const [addedId, setAddedId] = useState(null);
+
+    const handleAdd = (p) => {
+        // prefix عشان الـ id مايتعارضش مع منتجات Clothes
+        addToCart({ ...p, id: `na-${p.id}` });
+        setAddedId(p.id);
+        setTimeout(() => setAddedId(null), 1200);
+    };
+
     return (
         <section className="new-arrivals section">
             <div className="container">
 
-                {/* Header */}
                 <div className="section-header section-header--center">
                     <span className="section-header__eyebrow">Just Dropped</span>
                     <h2 className="section-header__title">Leave Your Athar</h2>
@@ -52,7 +63,6 @@ export default function NewArrivals() {
                     </p>
                 </div>
 
-                {/* Grid */}
                 <div className="na-grid">
                     {products.map((p) => (
                         <div className="product-card" key={p.id}>
@@ -63,7 +73,12 @@ export default function NewArrivals() {
                                         {p.badge}
                                     </span>
                                 )}
-                                <button className="product-card__quick-add">Quick Add</button>
+                                <button
+                                    className="product-card__quick-add"
+                                    onClick={() => handleAdd(p)}
+                                >
+                                    {addedId === p.id ? "Added ✓" : "Quick Add"}
+                                </button>
                             </div>
                             <div className="product-card__info">
                                 <span className="product-card__category">{p.category}</span>
@@ -77,7 +92,6 @@ export default function NewArrivals() {
                     ))}
                 </div>
 
-                {/* CTA */}
                 <div className="na-cta">
                     <a href="/collections" className="btn btn-outline">View All Collections</a>
                 </div>

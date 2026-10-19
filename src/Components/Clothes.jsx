@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useCart } from "./CartContext";
 import "../Css/Clothes.css";
 
 const products = [
@@ -138,8 +139,17 @@ const products = [
 ];
 const filters = ["All", "Men", "Women", "Sale"];
 
-export default function NewArrivals() {
+export default function Clothes() {
     const [active, setActive] = useState("All");
+    const [addedId, setAddedId] = useState(null);
+    const { addToCart } = useCart();
+
+    const handleAdd = (p) => {
+        // prefix عشان الـ id مايتعارضش مع منتجات NewArrivals
+        addToCart({ ...p, id: `clothes-${p.id}` });
+        setAddedId(p.id);
+        setTimeout(() => setAddedId(null), 1200);
+    };
 
     const filtered = active === "All"
         ? products
@@ -191,8 +201,11 @@ export default function NewArrivals() {
 
                                     {/* Hover Actions */}
                                     <div className="product-card__actions">
-                                        <button className="product-card__quick-add">
-                                            Quick Add
+                                        <button
+                                            className="product-card__quick-add"
+                                            onClick={() => handleAdd(p)}
+                                        >
+                                            {addedId === p.id ? "Added ✓" : "Quick Add"}
                                         </button>
                                         <button className="product-card__wishlist" aria-label="Wishlist">
                                             ♡

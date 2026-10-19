@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ShoppingBag, Search, User, Menu, X } from "lucide-react";
+import { useCart } from "./CartContext";
 import "../Css/Navbar.css";
 
 const links = [
@@ -12,12 +14,14 @@ const links = [
 
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const { totalItems } = useCart();
+
     return (
         <>
             <div className="announcement-bar">
                 شحن مجاني على جميع الطلبات لفترة محدودة   &nbsp;·&nbsp; NEW COLLECTION NOW LIVE
             </div>
-            
+
             <nav className="athar-navbar">
                 <button
                     className="hamburger"
@@ -27,31 +31,33 @@ export default function Navbar() {
                     {menuOpen ? <X size={20} /> : <Menu size={20} />}
                 </button>
 
-                <a href="/" className="nav-logo">ATHAR</a>
+                <Link to="/" className="nav-logo">ATHAR</Link>
                 <ul className="nav-links">
                     {links.map((l) => (
                         <li key={l.label}>
-                            <a href={l.href}>{l.label}</a>
+                            <Link to={l.href}>{l.label}</Link>
                         </li>
                     ))}
                 </ul>
 
                 <div className="nav-actions">
-                    <a href="/search" aria-label="Search"><Search size={18} /></a>
+                    <Link to="/search" aria-label="Search"><Search size={18} /></Link>
                     <span className="nav-divider" />
-                    <a href="/account" aria-label="Account"><User size={18} /></a>
-                    <a href="/cart" aria-label="Cart" className="cart-icon">
+                    <Link to="/account" aria-label="Account"><User size={18} /></Link>
+                    <Link to="/cart" aria-label="Cart" className="cart-icon">
                         <ShoppingBag size={18} />
-                        <span className="cart-dot" />
-                    </a>
+                        {totalItems > 0 && (
+                            <span className="cart-count">{totalItems}</span>
+                        )}
+                    </Link>
                 </div>
             </nav>
 
             <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
                 {links.map((l) => (
-                    <a key={l.label} href={l.href} onClick={() => setMenuOpen(false)}>
+                    <Link key={l.label} to={l.href} onClick={() => setMenuOpen(false)}>
                         {l.label}
-                    </a>
+                    </Link>
                 ))}
             </div>
         </>

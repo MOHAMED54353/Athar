@@ -164,3 +164,23 @@
         justify-content: space-between;
     }
 }
+.cart-icon {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 8px;
+    background: var(--clr-accent);
+    color: var(--clr-dark);
+    font-family: var(--ff-sans);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 16px;
+    text-align: center;
+}

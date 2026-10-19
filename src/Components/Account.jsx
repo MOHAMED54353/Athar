@@ -48,10 +48,8 @@ export default function Account() {
     return (
         <>
             <Navbar />
-
             <section className="account-page section">
                 <div className="container">
-
                     <div className="section-header section-header--center">
                         <span className="section-header__eyebrow">
                             {profile.fullName ? `أهلاً ${profile.fullName.split(" ")[0]}` : "Welcome"}
@@ -75,7 +73,6 @@ export default function Account() {
                         </button>
                     </div>
 
-                    {/* Orders */}
                     {tab === "orders" &&
                         (orders.length === 0 ? (
                             <div className="acc-empty">
@@ -121,7 +118,6 @@ export default function Account() {
                             </div>
                         ))}
 
-                    {/* Profile */}
                     {tab === "profile" && (
                         <form className="acc-form" onSubmit={handleSave}>
                             <div className="co-field">
@@ -165,10 +161,8 @@ export default function Account() {
                             </button>
                         </form>
                     )}
-
                 </div>
             </section>
-
             <Footer />
         </>
     );

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { useCart } from "./CartContext";
+import ProductCard from "./ProductCard";
 import products from "../data/products";
 import "../Css/Clothes.css";
 import "../Css/Shop.css";
@@ -13,8 +13,6 @@ const suggestions = ["Dress", "Jacket", "Shirt", "Jeans", "Skirt", "Tee"];
 export default function Search() {
     const [params, setParams] = useSearchParams();
     const q = params.get("q") || "";
-    const { addToCart } = useCart();
-    const [addedId, setAddedId] = useState(null);
 
     useEffect(() => {
         window.scrollTo({ top: 0 });
@@ -34,12 +32,6 @@ export default function Search() {
                 (p.badge || "").toLowerCase().includes(term)
         )
         : [];
-
-    const handleAdd = (p) => {
-        addToCart({ ...p, id: `clothes-${p.id}` });
-        setAddedId(p.id);
-        setTimeout(() => setAddedId(null), 1200);
-    };
 
     return (
         <>
@@ -99,40 +91,7 @@ export default function Search() {
                             <div className="row g-4">
                                 {results.map((p) => (
                                     <div className="col-6 col-md-4 col-lg-3" key={p.id}>
-                                        <div className="product-card">
-
-                                            <div className="product-card__img-wrap">
-                                                <img src={p.img} alt={p.name} />
-
-                                                {p.badge && (
-                                                    <span className={`product-card__badge ${p.badge === "Sale" ? "badge--sale" : ""}`}>
-                                                        {p.badge}
-                                                    </span>
-                                                )}
-
-                                                <div className="product-card__actions">
-                                                    <button
-                                                        className="product-card__quick-add"
-                                                        onClick={() => handleAdd(p)}
-                                                    >
-                                                        {addedId === p.id ? "Added ✓" : "Quick Add"}
-                                                    </button>
-                                                    <button className="product-card__wishlist" aria-label="Wishlist">
-                                                        ♡
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            <div className="product-card__info">
-                                                <span className="product-card__category">{p.category}</span>
-                                                <p className="product-card__name">{p.name}</p>
-                                                <p className="product-card__price">
-                                                    {p.price} ج.م
-                                                    {p.oldPrice && <s>{p.oldPrice} ج.م</s>}
-                                                </p>
-                                            </div>
-
-                                        </div>
+                                        <ProductCard p={p} />
                                     </div>
                                 ))}
                             </div>

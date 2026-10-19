@@ -30,10 +30,8 @@ export default function About() {
     return (
         <>
             <Navbar />
-
             <section className="about-page section">
                 <div className="container">
-
                     <div className="section-header section-header--center">
                         <span className="section-header__eyebrow">Our Story</span>
                         <h2 className="section-header__title">About Athar</h2>
@@ -70,10 +68,8 @@ export default function About() {
                             Shop The Collection
                         </Link>
                     </div>
-
                 </div>
             </section>
-
             <Footer />
         </>
     );

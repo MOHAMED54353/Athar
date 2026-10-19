@@ -10,11 +10,8 @@ export default function AboutBrand() {
         >
             <div className="container">
                 <div className="row align-items-center g-5">
-                    {/* ── Image Side ── */}
                     <div className="col-12 col-lg-6">
                         <div style={{ position: "relative" }}>
-
-                            {/* Main Image */}
                             <div style={{
                                 overflow: "hidden",
                                 aspectRatio: "4/5",
@@ -37,7 +34,6 @@ export default function AboutBrand() {
                                 />
                             </div>
 
-                            {/* Accent Line */}
                             <div style={{
                                 position: "absolute",
                                 top: "2rem",
@@ -46,11 +42,9 @@ export default function AboutBrand() {
                                 height: "80px",
                                 background: "var(--clr-accent)",
                             }} />
-
                         </div>
                     </div>
 
-                    {/* ── Text Side ── */}
                     <div className="col-12 col-lg-6" dir="rtl">
                         <div style={{
                             display: "flex",
@@ -58,7 +52,6 @@ export default function AboutBrand() {
                             gap: "1.5rem",
                             paddingLeft: "clamp(0px, 3vw, 2rem)",
                         }}>
-                            {/* Heading */}
                             <h2 dir="ltr" style={{
                                 fontFamily: "var(--ff-serif)",
                                 fontSize: "var(--fs-3xl)",
@@ -76,14 +69,12 @@ export default function AboutBrand() {
                                 </em>
                             </h2>
 
-                            {/* Divider */}
                             <div style={{
                                 width: "40px",
                                 height: "1px",
                                 background: "var(--clr-accent)",
                             }} />
 
-                            {/* Body */}
                             <p dir="" style={{
                                 fontFamily: "var(--ff-sans)",
                                 fontSize: "var(--fs-base)",
@@ -108,7 +99,6 @@ export default function AboutBrand() {
                                 حتى بعد ما تمشي.
                             </p>
 
-                            {/* Stats Row */}
                             <div className="row g-3" style={{ marginTop: "0.5rem" }}>
                                 {[
                                     { num: "+5K", label: "Happy Clients" },
@@ -145,17 +135,13 @@ export default function AboutBrand() {
                                     </div>
                                 ))}
                             </div>
-
-                            {/* CTA */}
                             <div style={{ marginTop: "0.5rem" }}>
                                 <a href="/about" className="btn btn-outline-accent">
                                     Discover More →
                                 </a>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>

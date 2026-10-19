@@ -239,3 +239,18 @@
         grid-area: remove;
     }
 }
+.cart-item__variant {
+    margin: 0;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-xs);
+    color: var(--clr-muted);
+}
+
+.cart-item__name a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.cart-item__name a:hover {
+    color: var(--clr-accent);
+}

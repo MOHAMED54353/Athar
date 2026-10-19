@@ -44,7 +44,7 @@ export default function Cart() {
                             {/* Items */}
                             <div className="cart-items">
                                 {items.map((item) => (
-                                    <div className="cart-item" key={item.id}>
+                                    <div className="cart-item" key={item.key}>
                                         <img
                                             className="cart-item__img"
                                             src={item.img}
@@ -55,7 +55,23 @@ export default function Cart() {
                                             <span className="cart-item__category">
                                                 {item.category}
                                             </span>
-                                            <p className="cart-item__name">{item.name}</p>
+                                            <p className="cart-item__name">
+                                                {Number.isInteger(item.id) ? (
+                                                    <Link to={`/product/${item.id}`}>{item.name}</Link>
+                                                ) : (
+                                                    item.name
+                                                )}
+                                            </p>
+                                            {(item.size || item.color) && (
+                                                <p className="cart-item__variant">
+                                                    {[
+                                                        item.size && `المقاس: ${item.size}`,
+                                                        item.color && `اللون: ${item.color}`,
+                                                    ]
+                                                        .filter(Boolean)
+                                                        .join(" · ")}
+                                                </p>
+                                            )}
                                             <p className="cart-item__price">
                                                 {fmt(item.price)} ج.م
                                             </p>
@@ -63,14 +79,14 @@ export default function Cart() {
 
                                         <div className="cart-item__qty">
                                             <button
-                                                onClick={() => decrease(item.id)}
+                                                onClick={() => decrease(item.key)}
                                                 aria-label="Decrease quantity"
                                             >
                                                 <Minus size={14} />
                                             </button>
                                             <span>{item.qty}</span>
                                             <button
-                                                onClick={() => increase(item.id)}
+                                                onClick={() => increase(item.key)}
                                                 aria-label="Increase quantity"
                                             >
                                                 <Plus size={14} />
@@ -83,7 +99,7 @@ export default function Cart() {
 
                                         <button
                                             className="cart-item__remove"
-                                            onClick={() => removeFromCart(item.id)}
+                                            onClick={() => removeFromCart(item.key)}
                                             aria-label="Remove item"
                                         >
                                             <Trash2 size={16} />

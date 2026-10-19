@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingBag, Search, User, Menu, X } from "lucide-react";
+import { ShoppingBag, Search, User, Heart, Menu, X } from "lucide-react";
 import { useCart } from "./CartContext";
+import { useWishlist } from "./WishlistContext";
 import "../Css/Navbar.css";
 
 const links = [
@@ -15,6 +16,7 @@ const links = [
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const { totalItems } = useCart();
+    const { count: wishCount } = useWishlist();
 
     return (
         <>
@@ -44,6 +46,12 @@ export default function Navbar() {
                     <Link to="/search" aria-label="Search"><Search size={18} /></Link>
                     <span className="nav-divider" />
                     <Link to="/account" aria-label="Account"><User size={18} /></Link>
+                    <Link to="/wishlist" aria-label="Wishlist" className="cart-icon">
+                        <Heart size={18} />
+                        {wishCount > 0 && (
+                            <span className="cart-count">{wishCount}</span>
+                        )}
+                    </Link>
                     <Link to="/cart" aria-label="Cart" className="cart-icon">
                         <ShoppingBag size={18} />
                         {totalItems > 0 && (

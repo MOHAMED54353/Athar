@@ -32,7 +32,6 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Scroll Indicator */}
             <div className="hero__scroll">
                 <span className="hero__scroll-label">Scroll</span>
                 <div className="hero__scroll-line" />

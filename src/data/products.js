@@ -1,4 +1,19 @@
-const products = [
+const sizesFor = (category) =>
+  category === "Women"
+    ? ["XS", "S", "M", "L", "XL"]
+    : ["S", "M", "L", "XL", "XXL"];
+
+// ⚠️ ألوان مؤقتة: عدّلها حسب المخزون الحقيقي (أو اكتب colors لكل منتج لوحده)
+const defaultColors = [
+  { name: "Black", hex: "#111111" },
+  { name: "Beige", hex: "#d8c7a8" },
+  { name: "Navy", hex: "#1f2a44" },
+];
+
+const defaultDescription =
+  "قطعة مختارة بعناية من كوليكشن Athar، بخامة مريحة وتفصيل مظبوط للاستخدام اليومي.";
+
+const base = [
   {
     id: 1,
     name: "Linen Oversized Shirt",
@@ -132,6 +147,57 @@ const products = [
     badge: null,
     img: "/19.jpg",
   },
+
+  // منتجات قسم "Leave Your Athar" في الصفحة الرئيسية (featured)
+  {
+    id: 17,
+    name: "Linen Oversized Shirt",
+    category: "Men",
+    price: "2499",
+    oldPrice: "3000",
+    badge: "New",
+    img: "/dab57cb8ac975af091624ae00a0000be.jpg",
+    featured: true,
+  },
+  {
+    id: 18,
+    name: "Draped Midi Dress",
+    category: "Women",
+    price: "8999",
+    badge: "New",
+    img: "/2.jpg",
+    featured: true,
+  },
+  {
+    id: 19,
+    name: "Wide Leg Trousers",
+    category: "Men",
+    price: "3000",
+    oldPrice: "7499",
+    badge: "Sale",
+    img: "/3.jpg",
+    featured: true,
+  },
+  {
+    id: 20,
+    name: "Structured Blazer",
+    category: "Women",
+    price: "7899",
+    badge: null,
+    img: "/4.jpg",
+    featured: true,
+  },
 ];
+
+// أي حقل تكتبه جوه المنتج (sizes / colors / description / images) بيغلب الافتراضي
+const products = base.map((p) => ({
+  sizes: sizesFor(p.category),
+  colors: defaultColors,
+  description: defaultDescription,
+  ...p,
+}));
+
+export const getProduct = (id) =>
+  products.find((p) => String(p.id) === String(id));
 
 export default products;

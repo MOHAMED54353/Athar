@@ -6,14 +6,21 @@ const STORAGE_KEY = "athar-cart";
 // بيحوّل "2499 ج.م" أو "2000" لرقم
 const parsePrice = (v) => Number(String(v).replace(/[^\d.]/g, "")) || 0;
 
+// نفس المنتج بمقاس/لون مختلف = سطر مختلف
+const makeKey = (id, size, color) => `${id}|${size || ""}|${color || ""}`;
+
+const loadItems = () => {
+    try {
+        const raw = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        // توافق مع الكارت القديم (من غير key)
+        return raw.map((i) => ({ ...i, key: i.key || String(i.id) }));
+    } catch {
+        return [];
+    }
+};
+
 export function CartProvider({ children }) {
-    const [items, setItems] = useState(() => {
-        try {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-        } catch {
-            return [];
-        }
-    });
+    const [items, setItems] = useState(loadItems);
 
     useEffect(() => {
         try {
@@ -23,42 +30,46 @@ export function CartProvider({ children }) {
         }
     }, [items]);
 
-    const addToCart = (product) => {
+    const addToCart = (product, { size = "", color = "", qty = 1 } = {}) => {
+        const key = makeKey(product.id, size, color);
         setItems((prev) => {
-            const found = prev.find((i) => i.id === product.id);
+            const found = prev.find((i) => i.key === key);
             if (found) {
                 return prev.map((i) =>
-                    i.id === product.id ? { ...i, qty: i.qty + 1 } : i
+                    i.key === key ? { ...i, qty: i.qty + qty } : i
                 );
             }
             return [
                 ...prev,
                 {
+                    key,
                     id: product.id,
                     name: product.name,
                     category: product.category,
                     img: product.img,
                     price: parsePrice(product.price),
-                    qty: 1,
+                    size,
+                    color,
+                    qty,
                 },
             ];
         });
     };
 
-    const increase = (id) =>
+    const increase = (key) =>
         setItems((prev) =>
-            prev.map((i) => (i.id === id ? { ...i, qty: i.qty + 1 } : i))
+            prev.map((i) => (i.key === key ? { ...i, qty: i.qty + 1 } : i))
         );
 
-    const decrease = (id) =>
+    const decrease = (key) =>
         setItems((prev) =>
             prev
-                .map((i) => (i.id === id ? { ...i, qty: i.qty - 1 } : i))
+                .map((i) => (i.key === key ? { ...i, qty: i.qty - 1 } : i))
                 .filter((i) => i.qty > 0)
         );
 
-    const removeFromCart = (id) =>
-        setItems((prev) => prev.filter((i) => i.id !== id));
+    const removeFromCart = (key) =>
+        setItems((prev) => prev.filter((i) => i.key !== key));
 
     const clearCart = () => setItems([]);
 

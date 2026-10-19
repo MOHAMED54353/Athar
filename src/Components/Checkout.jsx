@@ -5,7 +5,6 @@ import Footer from "./Footer";
 import { useCart } from "./CartContext";
 import "../Css/Checkout.css";
 
-// رقم واتساب المتجر بالصيغة الدولية (مصر = 20 + الرقم من غير الصفر)
 const WHATSAPP_NUMBER = "201044321689";
 
 const fmt = (n) => n.toLocaleString("en-US");
@@ -43,7 +42,12 @@ const buildWhatsAppUrl = (o) => {
 
     lines.push("", "🧾 المنتجات:");
     o.items.forEach((i) => {
-        lines.push(`• ${i.qty} × ${i.name} — ${fmt(i.price * i.qty)} ج.م`);
+        const variant = [i.size && `المقاس ${i.size}`, i.color && `اللون ${i.color}`]
+            .filter(Boolean)
+            .join(" / ");
+        lines.push(
+            `• ${i.qty} × ${i.name}${variant ? ` (${variant})` : ""} — ${fmt(i.price * i.qty)} ج.م`
+        );
     });
 
     lines.push(
@@ -94,7 +98,6 @@ export default function Checkout() {
             payment: "cash_on_delivery",
         };
 
-        // 1) نحفظ الطلب
         try {
             const old = JSON.parse(localStorage.getItem("athar-orders")) || [];
             localStorage.setItem("athar-orders", JSON.stringify([...old, newOrder]));
@@ -102,16 +105,13 @@ export default function Checkout() {
             /* ignore */
         }
 
-        // 2) نفتح واتساب برسالة الطلب
         window.open(buildWhatsAppUrl(newOrder), "_blank", "noopener,noreferrer");
 
-        // 3) نفضّي الكارت ونعرض صفحة التأكيد
         setOrder(newOrder);
         clearCart();
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
-    /* ───────── Success ───────── */
     if (order) {
         return (
             <>
@@ -152,7 +152,6 @@ export default function Checkout() {
         );
     }
 
-    /* ───────── Empty ───────── */
     if (items.length === 0) {
         return (
             <>
@@ -172,14 +171,12 @@ export default function Checkout() {
         );
     }
 
-    /* ───────── Form ───────── */
     return (
         <>
             <Navbar />
 
             <section className="checkout-page section">
                 <div className="container">
-
                     <div className="section-header section-header--center">
                         <span className="section-header__eyebrow">Almost There</span>
                         <h2 className="section-header__title">Checkout</h2>
@@ -187,8 +184,6 @@ export default function Checkout() {
                     </div>
 
                     <form className="co-layout" onSubmit={handleSubmit} noValidate>
-
-                        {/* Form */}
                         <div className="co-form">
                             <h3 className="co-title">بيانات الشحن</h3>
 
@@ -289,18 +284,24 @@ export default function Checkout() {
                             </div>
                         </div>
 
-                        {/* Summary */}
                         <aside className="co-summary">
                             <h3 className="co-title">ملخص الطلب</h3>
 
                             <div className="co-summary__items">
                                 {items.map((item) => (
-                                    <div className="co-summary__item" key={item.id}>
+                                    <div className="co-summary__item" key={item.key}>
                                         <div className="co-summary__thumb">
                                             <img src={item.img} alt={item.name} />
                                             <span className="co-summary__qty">{item.qty}</span>
                                         </div>
-                                        <p className="co-summary__name">{item.name}</p>
+                                        <p className="co-summary__name">
+                                            {item.name}
+                                            {(item.size || item.color) && (
+                                                <small className="co-summary__variant">
+                                                    {[item.size, item.color].filter(Boolean).join(" · ")}
+                                                </small>
+                                            )}
+                                        </p>
                                         <p className="co-summary__price">
                                             {fmt(item.price * item.qty)} ج.م
                                         </p>
@@ -332,11 +333,9 @@ export default function Checkout() {
                                 ← Back to Cart
                             </Link>
                         </aside>
-
                     </form>
                 </div>
             </section>
-
             <Footer />
         </>
     );

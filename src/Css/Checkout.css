@@ -282,3 +282,22 @@ select.co-input option {
         grid-template-columns: 1fr;
     }
 }
+.co-success__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-md);
+}
+
+.co-success__home {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-wider);
+    text-transform: uppercase;
+    color: var(--clr-muted);
+    text-decoration: none;
+}
+
+.co-success__home:hover {
+    color: var(--clr-light);
+}

@@ -5,6 +5,9 @@ import Footer from "./Footer";
 import { useCart } from "./CartContext";
 import "../Css/Checkout.css";
 
+// رقم واتساب المتجر بالصيغة الدولية (مصر = 20 + الرقم من غير الصفر)
+const WHATSAPP_NUMBER = "201044321689";
+
 const fmt = (n) => n.toLocaleString("en-US");
 
 const governorates = [
@@ -22,6 +25,35 @@ const initialForm = {
     city: "",
     address: "",
     notes: "",
+};
+
+const buildWhatsAppUrl = (o) => {
+    const lines = [
+        "🛍️ طلب جديد من Athar",
+        `رقم الطلب: ${o.number}`,
+        "",
+        `👤 الاسم: ${o.customer.fullName}`,
+        `📞 الموبايل: ${o.customer.phone}`,
+        `📍 العنوان: ${o.customer.governorate} - ${o.customer.city} - ${o.customer.address}`,
+    ];
+
+    if (o.customer.notes.trim()) {
+        lines.push(`📝 ملاحظات: ${o.customer.notes.trim()}`);
+    }
+
+    lines.push("", "🧾 المنتجات:");
+    o.items.forEach((i) => {
+        lines.push(`• ${i.qty} × ${i.name} — ${fmt(i.price * i.qty)} ج.م`);
+    });
+
+    lines.push(
+        "",
+        `🔢 عدد القطع: ${o.totalItems}`,
+        `💰 الإجمالي: ${fmt(o.totalPrice)} ج.م`,
+        "💵 الدفع: عند الاستلام"
+    );
+
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
 };
 
 export default function Checkout() {
@@ -62,6 +94,7 @@ export default function Checkout() {
             payment: "cash_on_delivery",
         };
 
+        // 1) نحفظ الطلب
         try {
             const old = JSON.parse(localStorage.getItem("athar-orders")) || [];
             localStorage.setItem("athar-orders", JSON.stringify([...old, newOrder]));
@@ -69,6 +102,10 @@ export default function Checkout() {
             /* ignore */
         }
 
+        // 2) نفتح واتساب برسالة الطلب
+        window.open(buildWhatsAppUrl(newOrder), "_blank", "noopener,noreferrer");
+
+        // 3) نفضّي الكارت ونعرض صفحة التأكيد
         setOrder(newOrder);
         clearCart();
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -84,18 +121,29 @@ export default function Checkout() {
                         <div className="co-success">
                             <div className="co-success__icon">✓</div>
                             <span className="section-header__eyebrow">Order Confirmed</span>
-                            <h2 className="co-success__title">تم تأكيد طلبك</h2>
+                            <h2 className="co-success__title">تم تسجيل طلبك</h2>
                             <p className="co-success__number">
                                 رقم الطلب: <strong>{order.number}</strong>
                             </p>
                             <p className="co-success__text">
-                                شكراً يا {order.customer.fullName.split(" ")[0]}، هنتواصل معاك
-                                على {order.customer.phone} لتأكيد الشحن. الدفع عند الاستلام
-                                ({fmt(order.totalPrice)} ج.م).
+                                شكراً يا {order.customer.fullName.split(" ")[0]}، فتحنالك واتساب
+                                برسالة الطلب جاهزة. اضغط <strong>إرسال</strong> هناك عشان نأكد
+                                معاك. الدفع عند الاستلام ({fmt(order.totalPrice)} ج.م).
                             </p>
-                            <Link to="/" className="btn btn-outline">
-                                Back to Home
-                            </Link>
+
+                            <div className="co-success__actions">
+                                <a
+                                    href={buildWhatsAppUrl(order)}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn btn-outline"
+                                >
+                                    فتح واتساب تاني
+                                </a>
+                                <Link to="/" className="co-success__home">
+                                    Back to Home
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -278,7 +326,7 @@ export default function Checkout() {
                             </div>
 
                             <button type="submit" className="btn btn-outline co-summary__submit">
-                                Place Order
+                                Place Order via WhatsApp
                             </button>
                             <Link to="/cart" className="co-summary__back">
                                 ← Back to Cart

@@ -1,0 +1,21 @@
+.shop-page {
+    background: var(--clr-dark);
+    min-height: 70vh;
+}
+
+.shop-count {
+    text-align: center;
+    margin: calc(var(--sp-md) * -1) 0 var(--sp-lg);
+    font-family: var(--ff-sans);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+    color: var(--clr-muted);
+}
+
+.shop-empty {
+    text-align: center;
+    padding: var(--sp-xl) 0;
+    font-family: var(--ff-sans);
+    color: var(--clr-muted);
+}

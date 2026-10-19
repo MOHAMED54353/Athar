@@ -77,23 +77,12 @@ export default function Reviews() {
                     <h2 className="section-header__title">آراء عملائنا</h2>
                     <div className="divider divider--center" />
                 </div>
-
-                {/* Slider */}
                 <div className="t-slider">
-
-                    {/* Quote Icon */}
                     <div className="t-quote">"</div>
-
-                    {/* Review Text */}
                     <p className="t-text" key={r.id}>{r.text}</p>
-
-                    {/* Stars */}
                     <Stars count={r.rating} />
-
-                    {/* Product Tag */}
                     <span className="t-product-tag">{r.product}</span>
 
-                    {/* Reviewer */}
                     <div className="t-reviewer">
                         <div className="t-avatar">{r.initial}</div>
                         <div className="t-reviewer-info">
@@ -102,7 +91,6 @@ export default function Reviews() {
                         </div>
                     </div>
 
-                    {/* Controls */}
                     <div className="t-controls">
                         <button className="t-btn" onClick={prev} aria-label="Previous">←</button>
                         <div className="t-dots">
@@ -117,10 +105,7 @@ export default function Reviews() {
                         </div>
                         <button className="t-btn" onClick={next} aria-label="Next">→</button>
                     </div>
-
                 </div>
-
-                {/* Bottom Stats */}
                 <div className="row g-3 t-stats">
                     {[
                         { num: "4.9", label: "Average Rating" },
@@ -136,7 +121,6 @@ export default function Reviews() {
                         </div>
                     ))}
                 </div>
-
             </div>
         </section>
     );

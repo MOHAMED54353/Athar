@@ -43,8 +43,6 @@ export default function SummerCollection() {
     return (
         <section className="summer section">
             <div className="container">
-
-                {/* Header */}
                 <div className="section-header section-header--center">
                     <span className="section-header__eyebrow">Season 2025</span>
                     <h2 className="section-header__title">
@@ -59,10 +57,7 @@ export default function SummerCollection() {
                     </p>
                 </div>
 
-                {/* Bento Grid */}
                 <div className="sc-grid">
-
-                    {/* Large Cards */}
                     {items.filter(i => i.size === "large").map(item => (
                         <a href={item.href} key={item.id} className="sc-card sc-card--large">
                             <img src={item.img} alt={item.title} className="sc-card__img" />
@@ -80,7 +75,6 @@ export default function SummerCollection() {
                         </a>
                     ))}
 
-                    {/* Small Cards */}
                     {items.filter(i => i.size === "small").map(item => (
                         <a href={item.href} key={item.id} className="sc-card sc-card--small">
                             <img src={item.img} alt={item.title} className="sc-card__img" />
@@ -106,7 +100,6 @@ export default function SummerCollection() {
                         View Full Summer Collection
                     </a>
                 </div>
-
             </div>
         </section>
     );

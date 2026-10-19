@@ -13,7 +13,6 @@ export default function Shop({ category = "All", eyebrow, title, sub }) {
         window.scrollTo({ top: 0 });
     }, []);
 
-    // Collections فيها فلتر Men/Women، لكن Men و Women مش محتاجينه
     const filters =
         category === "All"
             ? ["All", "Men", "Women", "New", "Sale"]
@@ -33,11 +32,8 @@ export default function Shop({ category = "All", eyebrow, title, sub }) {
     return (
         <>
             <Navbar />
-
             <section className="shop-page section">
                 <div className="container">
-
-                    {/* Header */}
                     <div className="section-header section-header--center">
                         <span className="section-header__eyebrow">{eyebrow}</span>
                         <h2 className="section-header__title">{title}</h2>
@@ -45,7 +41,6 @@ export default function Shop({ category = "All", eyebrow, title, sub }) {
                         <p className="section-header__sub">{sub}</p>
                     </div>
 
-                    {/* Filters */}
                     <div className="na-filters">
                         {filters.map((f) => (
                             <button
@@ -57,10 +52,7 @@ export default function Shop({ category = "All", eyebrow, title, sub }) {
                             </button>
                         ))}
                     </div>
-
                     <p className="shop-count">{filtered.length} منتج</p>
-
-                    {/* Grid */}
                     {filtered.length === 0 ? (
                         <p className="shop-empty">مفيش منتجات في الفلتر ده دلوقتي.</p>
                     ) : (
@@ -72,10 +64,8 @@ export default function Shop({ category = "All", eyebrow, title, sub }) {
                             ))}
                         </div>
                     )}
-
                 </div>
             </section>
-
             <Footer />
         </>
     );

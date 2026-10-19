@@ -189,7 +189,6 @@ const base = [
   },
 ];
 
-// أي حقل تكتبه جوه المنتج (sizes / colors / description / images) بيغلب الافتراضي
 const products = base.map((p) => ({
   sizes: sizesFor(p.category),
   colors: defaultColors,

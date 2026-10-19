@@ -97,10 +97,8 @@ export default function Search() {
                             </div>
                         </>
                     )}
-
                 </div>
             </section>
-
             <Footer />
         </>
     );

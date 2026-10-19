@@ -5,7 +5,7 @@ import AboutBrand from "../Components/AboutBrand"
 import Line from "../Components/Line"
 import Clothes from "../Components/Clothes"
 import SummerCollection from "../Components/SummerCollection"
-// import Reviews from "../Components/Reviews"
+import Reviews from "../Components/Reviews"
 import Footer from "../Components/Footer"
 const Home = () => {
     return (
@@ -17,9 +17,8 @@ const Home = () => {
             <Line />
             <Clothes />
             <SummerCollection />
-            {/* <Reviews /> */}
+            <Reviews />
             <Footer />
-
         </>
     )
 }

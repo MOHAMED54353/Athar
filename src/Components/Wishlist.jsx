@@ -19,10 +19,8 @@ export default function Wishlist() {
     return (
         <>
             <Navbar />
-
             <section className="shop-page section">
                 <div className="container">
-
                     <div className="section-header section-header--center">
                         <span className="section-header__eyebrow">Saved For Later</span>
                         <h2 className="section-header__title">Wishlist</h2>
@@ -48,10 +46,8 @@ export default function Wishlist() {
                             </div>
                         </>
                     )}
-
                 </div>
             </section>
-
             <Footer />
         </>
     );
